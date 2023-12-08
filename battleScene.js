@@ -31,6 +31,25 @@ function initBattle() {
     })
     document.querySelectorAll("button").forEach((button) => {
         button.addEventListener('click', (e) => {
+            if (emby.health <= 0) {
+                queue.push(() => {
+                    emby.faint();
+                })
+                queue.push(() => {
+                    gsap.to('#overlappingDiv', {
+                        opacity: 1,
+                        onComplete: () => {
+                            cancelAnimationFrame(battleAnimationId);
+                            animate();
+                            document.getElementById('userInterface').style.display = 'none';
+                            gsap.to('#overlappingDiv', {
+                                opacity: 0
+                            })
+                        }
+                    })
+                })
+                return;
+            }
             const selectedAttack = attacks[e.currentTarget.innerHTML];
             emby.attack({
                 attack: selectedAttack,
@@ -64,25 +83,6 @@ function initBattle() {
                     renderedSprites
                 })
             })
-            if (emby.health <= 0) {
-                queue.push(() => {
-                    emby.faint();
-                })
-                queue.push(() => {
-                    gsap.to('#overlappingDiv', {
-                        opacity: 1,
-                        onComplete: () => {
-                            cancelAnimationFrame(battleAnimationId);
-                            animate();
-                            document.getElementById('userInterface').style.display = 'none';
-                            gsap.to('#overlappingDiv', {
-                                opacity: 0
-                            })
-                        }
-                    })
-                })
-                return;
-            }
         })
         button.addEventListener('mouseenter', (e) => {
             const selectedAttack = attacks[e.currentTarget.innerHTML];
