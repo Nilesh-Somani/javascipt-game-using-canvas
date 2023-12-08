@@ -133,6 +133,7 @@ class Monster extends Sprite {
         if (this.isEnemy) rotation = -2.2
 
         recipient.health -= attack.damage
+        if (recipient.health < attack.damage) recipient.health = 0;
 
         switch (attack.name) {
             case 'Fireball':
