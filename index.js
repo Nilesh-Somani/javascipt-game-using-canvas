@@ -27,7 +27,7 @@ collisionsMap.forEach((row, i) => {
             boundaries.push(new Boundary({
                 position: {
                     x: j * Boundary.width + offset.x,
-                    y: i * Boundary.height + offset.y / 1.025
+                    y: i * Boundary.height + offset.y / 1.015
                 }
             }))
     })
@@ -177,7 +177,7 @@ function animate() {
             }
         }
     }
-    if (keys.u.pressed && lastKey === 'u') {
+    if (keys.u.pressed) {
         player.animate = true;
         player.image = player.sprites.up;
         for (let i = 0; i < boundaries.length; i++) {
@@ -197,7 +197,7 @@ function animate() {
         }
         if (moving) movables.forEach(movable => movable.position.y += 3);
     }
-    else if (keys.d.pressed && lastKey === 'd') {
+    else if (keys.d.pressed) {
         player.animate = true;
         player.image = player.sprites.down;
         for (let i = 0; i < boundaries.length; i++) {
@@ -217,7 +217,7 @@ function animate() {
         }
         if (moving) movables.forEach(movable => movable.position.y -= 3);
     }
-    else if (keys.l.pressed && lastKey === 'l') {
+    else if (keys.l.pressed) {
         player.animate = true;
         player.image = player.sprites.left;
         for (let i = 0; i < boundaries.length; i++) {
@@ -237,7 +237,7 @@ function animate() {
         }
         if (moving) movables.forEach(movable => movable.position.x += 3);
     }
-    else if (keys.r.pressed && lastKey === 'r') {
+    else if (keys.r.pressed) {
         player.animate = true;
         player.image = player.sprites.right;
         for (let i = 0; i < boundaries.length; i++) {
@@ -260,24 +260,20 @@ function animate() {
 }
 animate();
 
-let lastKey = ''
+
 window.addEventListener('keydown', (e) => {
     switch (e.key) {
         case 'ArrowUp':
             keys.u.pressed = true;
-            lastKey = 'u';
             break;
         case 'ArrowDown':
             keys.d.pressed = true;
-            lastKey = 'd';
             break;
         case 'ArrowLeft':
             keys.l.pressed = true;
-            lastKey = 'l';
             break;
         case 'ArrowRight':
             keys.r.pressed = true;
-            lastKey = 'r'
             break;
     }
 })
