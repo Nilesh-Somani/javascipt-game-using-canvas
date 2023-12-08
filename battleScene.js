@@ -29,9 +29,7 @@ function initBattle() {
         button.innerHTML = attack.name;
         document.getElementById('attackBox').append(button);
     })
-    document.querySelectorAll("button").forEach((button) => {
-        button.addEventListener('click', (e) => {
-            if (emby.health <= 0) {
+    if (emby.health <= 0) {
                 queue.push(() => {
                     emby.faint();
                 })
@@ -50,6 +48,8 @@ function initBattle() {
                 })
                 return;
             }
+    document.querySelectorAll("button").forEach((button) => {
+        button.addEventListener('click', (e) => {
             const selectedAttack = attacks[e.currentTarget.innerHTML];
             emby.attack({
                 attack: selectedAttack,
