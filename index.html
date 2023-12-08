@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        body {
+            background-color: black;
+            margin: 0;
+        }
+
+        .player {
+            display: inline-block;
+            position: relative;
+        }
+
+        .battle-ground {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: black;
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .battle-bar {
+            height: 140px;
+            background-color: white;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-top: 4px solid black;
+            display: flex;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        #attackBox {
+            width: 66.6%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        #attackType {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 33.3%;
+            border-left: 4px solid black;
+        }
+
+        button {
+            border: 0;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #ddd;
+            cursor: pointer;
+        }
+
+        .monster-info1 {
+            background-color: white;
+            width: 250px;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            border: 4px solid black;
+            padding: 12px;
+        }
+
+        .monster-info2 {
+            background-color: white;
+            width: 250px;
+            position: absolute;
+            bottom: 150px;
+            right: 50px;
+            border: 4px solid black;
+            padding: 12px;
+        }
+
+        .health-bar {
+            position: relative;
+        }
+
+        .health-bar-background {
+            height: 5px;
+            background-color: #ccc;
+            margin-top: 10px;
+        }
+
+        .health {
+            height: 10px;
+            background-color: green;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            font-size: 10px;
+            text-align: end;
+        }
+
+        .attack-dialogue {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: white;
+            padding: 12px;
+            display: none;
+            cursor: pointer;
+        }
+        #userInterface {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="player">
+        <div id="overlappingDiv" class="battle-ground"></div>
+        <canvas></canvas>
+        <div id="userInterface">
+            <div class="monster-info1">
+                <h1>Draggle</h1>
+                <div class="health-bar">
+                    <div class="health-bar-background"></div>
+                    <div id="enemyHealthBar" class="health">100%</div>
+                </div>
+            </div>
+            <div class="monster-info2">
+                <h1>Emby</h1>
+                <div class="health-bar">
+                    <div class="health-bar-background"></div>
+                    <div id="playerHealthBar" class="health">100%</div>
+                </div>
+            </div>
+            <div class="battle-bar">
+                <div id="dialogueBox" class="attack-dialogue"></div>
+                <div id="attackBox"></div>
+                <div id="attackType">
+                    <h1>Attack Type</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"
+        integrity="sha512-7Au1ULjlT8PP1Ygs6mDZh9NuQD0A5prSrAUiPHMXpU6g3UMd8qesVnhug5X4RoDr35x5upNpx0A6Sisz1LSTXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./data/collision.js"></script>
+    <script src="./data/battleZones.js"></script>
+    <script src="./data/attack.js"></script>
+    <script src="./data/monster.js"></script>
+    <script src="classes.js"></script>
+    <script src="index.js"></script>
+    <script src="battleScene.js"></script>
+</body>
+
+</html>
