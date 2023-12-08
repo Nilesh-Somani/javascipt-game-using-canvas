@@ -132,9 +132,8 @@ class Monster extends Sprite {
         let rotation = 1
         if (this.isEnemy) rotation = -2.2
 
-        recipient.health -= attack.damage
-        if (recipient.health < attack.damage) recipient.health = 0;
-
+        if(recipient.health < attack.damage) recipient.health = 0;
+        else recipient.health -= attack.damage
         switch (attack.name) {
             case 'Fireball':
                 const fireballImage = new Image()
