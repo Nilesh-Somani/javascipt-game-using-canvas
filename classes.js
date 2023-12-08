@@ -124,8 +124,7 @@ class Monster extends Sprite {
 
     attack({ attack, recipient, renderedSprites }) {
         document.querySelector('#dialogueBox').style.display = 'block'
-        document.querySelector('#dialogueBox').innerHTML =
-            this.name + ' used ' + attack.name
+        document.querySelector('#dialogueBox').innerHTML = this.name + ' used ' + attack.name;
 
         let healthBar = '#enemyHealthBar'
         if (this.isEnemy) healthBar = '#playerHealthBar'
@@ -221,6 +220,31 @@ class Monster extends Sprite {
         }
         document.getElementById('enemyHealthBar').innerHTML = draggle.health + '%';
         document.getElementById('playerHealthBar').innerHTML = emby.health + '%';
+        if (emby.health <= 0 || draggle.health <= 0) {
+            if (emby.health <= 0) {
+                queue.push(() => {
+                    emby.faint();
+                })
+            } else if (draggle.health <= 0) {
+                queue.push(() => {
+                    draggle.faint();
+                })
+            }
+            queue.push(() => {
+                gsap.to('#overlappingDiv', {
+                    opacity: 1,
+                    onComplete: () => {
+                        cancelAnimationFrame(battleAnimationId);
+                        animate();
+                        document.getElementById('userInterface').style.display = 'none';
+                        gsap.to('#overlappingDiv', {
+                            opacity: 0
+                        })
+                    }
+                })
+            })
+            return;
+        }
     }
 }
 

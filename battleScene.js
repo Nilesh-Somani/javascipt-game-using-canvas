@@ -37,25 +37,6 @@ function initBattle() {
                 recipient: draggle,
                 renderedSprites
             })
-            if (draggle.health <= 0 || emby.health <= 0) {
-                queue.push(() => {
-                    draggle.faint();
-                })
-                queue.push(() => {
-                    gsap.to('#overlappingDiv', {
-                        opacity: 1,
-                        onComplete: () => {
-                            cancelAnimationFrame(battleAnimationId);
-                            animate();
-                            document.getElementById('userInterface').style.display = 'none';
-                            gsap.to('#overlappingDiv', {
-                                opacity: 0
-                            })
-                        }
-                    })
-                })
-                return;
-            }
             const randomAttack = draggle.attacks[Math.floor(Math.random() * draggle.attacks.length)]
             queue.push(() => {
                 draggle.attack({
@@ -64,25 +45,6 @@ function initBattle() {
                     renderedSprites
                 })
             })
-            if (emby.health <= 0) {
-                queue.push(() => {
-                    emby.faint();
-                })
-                queue.push(() => {
-                    gsap.to('#overlappingDiv', {
-                        opacity: 1,
-                        onComplete: () => {
-                            cancelAnimationFrame(battleAnimationId);
-                            animate();
-                            document.getElementById('userInterface').style.display = 'none';
-                            gsap.to('#overlappingDiv', {
-                                opacity: 0
-                            })
-                        }
-                    })
-                })
-                return;
-            }
         })
         button.addEventListener('mouseenter', (e) => {
             const selectedAttack = attacks[e.currentTarget.innerHTML];
